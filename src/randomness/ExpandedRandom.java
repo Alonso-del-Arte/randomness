@@ -18,6 +18,7 @@ package randomness;
 
 import java.time.OffsetDateTime;
 import java.util.Random;
+import java.util.Set;
 
 /**
  *
@@ -38,5 +39,15 @@ public abstract class ExpandedRandom extends Random {
     public abstract String nextString();
     
     public abstract OffsetDateTime nextDateTime();
+    
+    // TODO: Write tests for this
+    public <E> E pickOneFrom(Set<E> set) {
+        return null;
+    }
+
+    // TODO: Write tests for this
+    public <E extends Enum<E>> E pickOneFrom(Class<E> enumType) {
+        return null;
+    }
 
 }
