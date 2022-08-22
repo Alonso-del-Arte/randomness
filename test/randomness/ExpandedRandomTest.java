@@ -16,6 +16,7 @@
  */
 package randomness;
 
+import java.math.BigInteger;
 import java.time.DayOfWeek;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
@@ -63,7 +64,7 @@ public class ExpandedRandomTest {
      * Test of nextASCIICharSeq method, of class ExpandedRandom.
      */
     @Test
-    public void testNextASCIICharSeq_int() {
+    public void testNextASCIICharSeq() {
         System.out.println("nextASCIICharSeq");
         int length = 0;
         ExpandedRandom instance = new ExpandedRandomImpl();
@@ -78,8 +79,7 @@ public class ExpandedRandomTest {
      * Test of nextASCIICharSeq method, of class ExpandedRandom.
      */
     @Test
-    public void testNextASCIICharSeq_int_int() {
-        System.out.println("nextASCIICharSeq");
+    public void testNextASCIICharSeqBoundedLength() {
         int minLength = 0;
         int maxLength = 0;
         ExpandedRandom instance = new ExpandedRandomImpl();
@@ -126,11 +126,17 @@ public class ExpandedRandomTest {
     public void testPickOneFrom() {
         System.out.println("pickOneFrom");
         ExpandedRandom instance = new ExpandedRandomImpl();
-        Object expResult = null;
-//        Object result = instance.pickOneFrom(null);
-//        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int capacity = instance.nextInt(128) + 32;
+        Set<BigInteger> set = new HashSet<>(capacity);
+        for (int i = 0; i < capacity; i++) {
+            BigInteger number = new BigInteger(i + 16, instance);
+            set.add(number);
+        }
+        BigInteger pick = instance.pickOneFrom(set);
+        assert pick != null : "Picked element should not be null";
+        String msg = "Picked number " + pick.toString() 
+                + " should be in set it is said to have been picked from";
+        assert set.contains(pick) : msg;
     }
 
     /**
@@ -162,16 +168,6 @@ public class ExpandedRandomTest {
         @Override
         public char nextASCIIChar() {
             return ' ';
-        }
-
-        @Override
-        public String nextASCIICharSeq(int length) {
-            return "";
-        }
-
-        @Override
-        public String nextASCIICharSeq(int minLength, int maxLength) {
-            return "";
         }
 
         @Override

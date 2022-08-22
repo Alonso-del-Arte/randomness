@@ -32,22 +32,37 @@ public abstract class ExpandedRandom extends Random {
     
     public abstract char nextASCIIChar();
     
-    public abstract String nextASCIICharSeq(int length);
+    public String nextASCIICharSeq(int length) {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
     
-    public abstract String nextASCIICharSeq(int minLength, int maxLength);
+    public String nextASCIICharSeq(int minLength, int maxLength) {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
     
     public abstract String nextString();
     
     public abstract OffsetDateTime nextDateTime();
     
-    // TODO: Write tests for this
     public <E> E pickOneFrom(Set<E> set) {
-        return null;
+        return (E) new java.math.BigInteger(12, this);
     }
 
-    // TODO: Write tests for this
+    /**
+     * Selects one value from an enumerated type.
+     * @param <E> The enumerated type. It must extend 
+     * <code>Enum&lt;E&gt;</code>.
+     * @param enumType The class of the enumerated type. Be sure to write 
+     * "<code>.class</code>" after the class name. For example, 
+     * <code>DayOfWeek.class</code>.
+     * @return One randomly or pseudorandomly chosen value from the enumerated 
+     * type. For the <code>DayOfWeek.class</code> example, that might be 
+     * <code>MONDAY</code>, for example.
+     */
     public <E extends Enum<E>> E pickOneFrom(Class<E> enumType) {
-        return null;
+        E[] values = enumType.getEnumConstants();
+        int index = this.nextInt(values.length);
+        return values[index];
     }
 
 }

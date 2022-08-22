@@ -36,7 +36,7 @@ class Pseudorandomness extends Random {
     
     private final ExternalRandomnessProvider randomProvider;
     
-    private int[] integers = {};
+//    private int[] integers = {};
     
     int[] connectToExternalRandomnessProvider() throws IOException {
         int[] numbers = {};

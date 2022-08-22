@@ -17,6 +17,7 @@
 package randomness;
 
 import java.util.Random;
+import java.util.Set;
 
 // TODO: Write static wrappers for Pseudorandomness's functions
 /**
@@ -69,6 +70,16 @@ public class Pseudorandom {
     // TODO: Write tests for this
     public static int nextInt(int bound) {
         return RANDOM.nextInt(bound);
+    }
+    
+    // TODO: Write tests for this
+    public static <E> E pickOneFrom(Set<E> set) {
+        return null;
+    }
+
+    // TODO: Write tests for this
+    public static <E extends Enum<E>> E pickOneFrom(Class<E> enumeratedType) {
+        return null;
     }
 
 }
